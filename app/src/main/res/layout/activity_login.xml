@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.mati.login_registration.Login">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary">
+
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="170dp"
+            android:src="@drawable/icon"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/emailText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginTop="3dp"
+            android:textSize="@dimen/panel_font"
+            android:textStyle="bold|italic"
+            android:textColor="@color/textColor"/>
+
+        <EditText
+            android:id="@+id/emailEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:shadowColor="@color/textColor"/>
+
+        <TextView
+            android:id="@+id/passwordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:layout_marginLeft="@dimen/text_margin"
+            android:textSize="@dimen/panel_font"
+            android:textStyle="bold|italic"
+            android:textColor="#FFFFFF"/>
+
+
+        <EditText
+            android:id="@+id/passwordEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:password="true"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/text_margin"
+            android:text="@string/register"
+            android:background="@color/button"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/text_margin"
+            android:layout_marginBottom="50dp"
+            android:onClick="onLogin"/>
+
+
+        <TextView
+            android:id="@+id/forget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forget"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/bottomPanelText"
+            android:textColor="@color/textColor"
+            android:onClick="resetPassword"/>
+
+        <TextView
+            android:id="@+id/registered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registered"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:textColor="@color/textColor"
+            android:onClick="singUp"/>
+
+    </LinearLayout>
+    
+    
+</android.support.constraint.ConstraintLayout>
