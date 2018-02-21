@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,8 +22,9 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText mEmail, mPassowrd;
     String email, password;
-    private FirebaseUser mUser;
+    private FirebaseUser user;
     Intent intent;
+    FirebaseAuth.AuthStateListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,39 +34,64 @@ public class Login extends AppCompatActivity {
         intent = new Intent(this, MainActivity.class);
 
         //View of EditText
-        mEmail = (EditText) findViewById(R.id.emailEdit);
-        mPassowrd = (EditText) findViewById(R.id.passwordEdit);
-
+        mEmail =  findViewById(R.id.emailEdit);
+        mPassowrd =  findViewById(R.id.passwordEdit);
+        final Button loginButton = findViewById(R.id.login);
         //Firebase
         mAuth = FirebaseAuth.getInstance();
-        mUser = mAuth.getCurrentUser();
+        user = mAuth.getCurrentUser();
 
-        if (mUser != null) {
-            Log.d(TAG, "Intent succes");
-            startActivity(intent);
-        }
-    }
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
 
-    public void onLogin(View view) {
-        email = mEmail.getText().toString();
-        password = mPassowrd.getText().toString();
-
-        if ((!email.isEmpty()) && (!password.isEmpty())) {
-            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(Login.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-                        Log.i(TAG, "Login with email: success");
-                        mUser = mAuth.getCurrentUser();
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(Login.this, "Login Failed, please try again", Toast.LENGTH_SHORT).show();
-                        Log.i(TAG, "Login with email: failed");
-                    }
+        mListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(user != null && user.isEmailVerified()){
+                    intent = new Intent(Login.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
-            });
-        }
+                /*else if(user != null && !user.isEmailVerified()){
+                    intent = new Intent(Login.this, Email_Verification.class);
+                    startActivity(intent);
+                    finish();
+                    return;
+                }*/
+            }
+        };
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                email = mEmail.getText().toString();
+                password = mPassowrd.getText().toString();
+
+                if ((!email.isEmpty()) && (!password.isEmpty())) {
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(Login.this, "Login Successfull", Toast.LENGTH_SHORT).show();
+                                Log.i(TAG, "Login with email: success");
+                                user = mAuth.getCurrentUser();
+                                if(user.isEmailVerified()) {
+                                    Intent intent = new Intent(Login.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    intent = new Intent(Login.this, Email_Verification.class);
+                                    startActivity(intent);
+                                }
+                            } else {
+                                Toast.makeText(Login.this, "Login Failed, please try again", Toast.LENGTH_SHORT).show();
+                                Log.i(TAG, "Login with email: failed");
+                            }
+                        }
+                    });
+                }
+            }
+        });
     }
 
     public void resetPassword(View view) {
@@ -74,6 +101,18 @@ public class Login extends AppCompatActivity {
         Intent registerIntent = new Intent(Login.this, Registration.class);
         startActivity(registerIntent);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAuth.removeAuthStateListener(mListener);
     }
 }
 

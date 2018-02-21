@@ -2,9 +2,14 @@
     <string name="app_name">Firebase Auth</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="register">Login</string>
+    <string name="register">Registration</string>
+    <string name="login">Login</string>
     <string name="forget">Forget your password?</string>
     <string name="registered">Don\'t have an account? Register Me!</string>
     <string name="haveAcc">I have account. Login Me!</string>
+    <string name="verification">Verification email was sent to your email %1$s , please click on link to verify your account</string>
+    <string name="sendAgain">Send verification email again</string>
+    <string name="image">Logo</string>
+    <string name="logout">Logout</string>
 </resources>
 
