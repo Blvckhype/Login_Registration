@@ -21,36 +21,26 @@
             android:layout_marginTop="50dp"
             android:src="@drawable/icon" />
 
-
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/emailBtn"
-            android:background="@color/button"
-            android:height="60dp"
+            android:backgroundTint="@color/button"
             android:textColor="@color/textColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             android:text="@string/logEmail" />
 
-
-        <Button
+        <com.google.android.gms.common.SignInButton
             android:id="@+id/googleBtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:height="60dp"
-            android:textColor="@color/textColor"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="20dp"
-            android:paddingStart="0sp"
-            android:background="@color/googleAccColor"
-            android:text="@string/logGoogle"
-            android:drawableLeft="@drawable/google_icon"
-            android:gravity="center|center_vertical"
-            />
+            android:layout_height="wrap_content"/>
+
+
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

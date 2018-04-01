@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.*;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,15 +15,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,15 +34,15 @@ public class ChooseRegistrationMethod extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     String name, surname;
-    FirebaseUser user;
     FirebaseAuth.AuthStateListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_registration_method);
-        final Button mGoogleBtn = findViewById(R.id.googleBtn);
+        final SignInButton mGoogleBtn = findViewById(R.id.googleBtn);
         final Button mEmailBtn = findViewById(R.id.emailBtn); //TODO
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -56,13 +51,11 @@ public class ChooseRegistrationMethod extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
 
-        user = mAuth.getCurrentUser();
         mListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(user != null){
-                    Intent intent = new Intent(ChooseRegistrationMethod.this, MainActivity.class);
-                    startActivity(intent);
+                if(firebaseAuth.getCurrentUser() != null){
+                    startActivity(new Intent(ChooseRegistrationMethod.this, MainActivity.class));
                     finish();
                 }
             }
@@ -123,10 +116,7 @@ public class ChooseRegistrationMethod extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent appIntent = new Intent(ChooseRegistrationMethod.this, MainActivity.class);
-                            appIntent.putExtra("Name", name);
-                            appIntent.putExtra("Surname", surname);
-                            startActivity(appIntent);
+                            startActivity( new Intent(ChooseRegistrationMethod.this, MainActivity.class));
                             finish();
                             //updateUI(user);
                         } else {

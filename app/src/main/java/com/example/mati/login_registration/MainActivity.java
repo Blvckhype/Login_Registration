@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import org.w3c.dom.Text;
 
 public class MainActivity extends Activity {
@@ -14,11 +17,14 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String name = getIntent().getStringExtra("Name");
-        String surname = getIntent().getStringExtra("Surname");
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        String display = mUser.getDisplayName();
 
-        TextView myText = findViewById(R.id.mainText);
-        myText.setText(name + surname);
+        TextView textView = (TextView) findViewById(R.id.mainText);
+        textView.setText(display);
+
+
 
     }
 }
