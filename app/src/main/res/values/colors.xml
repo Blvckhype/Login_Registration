@@ -5,4 +5,5 @@
     <color name="colorAccent">#000000</color>
     <color name="button">#499C00</color>
     <color name="textColor">#FFFFFF</color>
+    <color name="googleAccColor">#DD4B39</color>
 </resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.mati.login_registration.ChooseRegistrationMethod">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary">
+
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="60dp"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/icon" />
+
+
+        <Button
+            android:id="@+id/emailBtn"
+            android:background="@color/button"
+            android:height="60dp"
+            android:textColor="@color/textColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/logEmail" />
+
+
+        <Button
+            android:id="@+id/googleBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:height="60dp"
+            android:textColor="@color/textColor"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            android:paddingStart="0sp"
+            android:background="@color/googleAccColor"
+            android:text="@string/logGoogle"
+            android:drawableLeft="@drawable/google_icon"
+            android:gravity="center|center_vertical"
+            />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -11,5 +11,7 @@
     <string name="sendAgain">Send verification email again</string>
     <string name="image">Logo</string>
     <string name="logout">Logout</string>
+    <string name="logEmail">With Email</string>
+    <string name="logGoogle">Google Account</string>
 </resources>
 
